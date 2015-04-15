@@ -1,0 +1,160 @@
+{
+    "channels":[
+        {
+            "name": "vbr-pext",
+            "opts": {
+            }
+        },
+        {
+            "name": "vbr-pint",
+            "opts": {
+            }
+        }
+    ],
+    
+    "nodes":[
+        {
+            "name": "qgw", 
+            "net_devices": [
+                {
+                    "name": "veth0",
+                    "channel": "vbr-pext",
+                    "opts": {}
+                },
+                {
+                    "name": "veth1",
+                    "channel": "vbr-pint",
+                    "opts": {}
+                }
+            ],
+            "applications": [
+                {
+                    "app_name": "ip_helper",
+                    "opts": {
+                        "net_device_name": "veth0",
+                        "ip_addr": "10.0.131.1/24"
+                    }
+                },
+                {
+                    "app_name": "ip_helper",
+                    "opts": {
+                        "net_device_name": "veth1",
+                        "ip_addr": "192.168.131.1/24"
+                    }
+                },
+                {
+                    "app_name": "simple_command",
+                    "opts": {
+                        "start_cmd": "sysctl net.ipv4.ip_forward=1"
+                    }
+                }
+            ],
+            "opts": {
+            }
+        },
+        {
+            "name": "qsrv1", 
+            "net_devices": [
+                {
+                    "name": "veth0",
+                    "channel": "vbr-pint",
+                    "opts": {}
+                }
+            ],
+            "applications": [
+                {
+                    "app_name": "ip_helper",
+                    "opts": {
+                        "net_device_name": "veth0",
+                        "ip_addr": "192.168.131.2/24",
+                        "default_gw": "192.168.131.1"
+                    }
+                },
+                {
+                    "app_name": "nodejs_app",
+                    "opts": {
+                        "app_filepath": "nodejs.app/hello.js"
+                    }
+                }
+            ],
+            "opts": {
+            }
+        },
+        {
+            "name": "qsrv2", 
+            "net_devices": [
+                {
+                    "name": "veth0",
+                    "channel": "vbr-pint",
+                    "opts": {}
+                }
+            ],
+            "applications": [
+                {
+                    "app_name": "ip_helper",
+                    "opts": {
+                        "net_device_name": "veth0",
+                        "ip_addr": "192.168.131.3/24",
+                        "default_gw": "192.168.131.1"
+                    }
+                },
+                {
+                    "app_name": "nodejs_app",
+                    "opts": {
+                        "app_filepath": "nodejs.app/goodbye.js"
+                    }
+                }
+            ],
+            "opts": {
+            }
+        },
+        {
+            "name": "qhost1", 
+            "net_devices": [
+                {
+                    "node_name": "qhost1",
+                    "name": "veth0",
+                    "channel": "vbr-pext",
+                    "opts": {
+                    }
+                }
+            ],
+            "applications": [
+                {
+                    "app_name": "ip_helper",
+                    "opts": {
+                        "net_device_name": "veth0",
+                        "ip_addr": "10.0.131.2/24",
+                        "default_gw": "10.0.131.1"
+                    }
+                }
+            ],
+            "opts": {
+            }
+        },
+        {
+            "name": "qhost2", 
+            "net_devices": [
+                {
+                    "node_name": "qhost2",
+                    "name": "veth0",
+                    "channel": "vbr-pext",
+                    "opts": {}
+                }
+            ],
+            "applications": [
+                {
+                    "app_name": "ip_helper",
+                    "opts": {
+                        "net_device_name": "veth0",
+                        "ip_addr": "10.0.131.3/24",
+                        "default_gw": "10.0.131.1"
+                    }
+                }
+            ],
+            "opts": {
+            }
+        }
+    ]
+}
+

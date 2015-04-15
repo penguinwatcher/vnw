@@ -1,0 +1,43 @@
+{
+    "channels":[
+        {
+            "name": "vbr-pext",
+            "opts": {
+            }
+        }
+    ],
+    
+    "nodes":[
+        {
+            "name": "qgw", 
+            "net_devices": [
+                {
+                    "node_name": "qgw",
+                    "name": "veth0",
+                    "channel": "vbr-pext",
+                    "opts": {
+                        "ip_addr": "10.0.131.254"
+                    }
+                }
+            ],
+            "opts": {
+            }
+        },
+        {
+            "name": "qhost1", 
+            "net_devices":[
+                {
+                    "node_name": "qhost1",
+                    "name": "veth0",
+                    "channel": "vbr-pext",
+                    "opts": {
+                        "ip_addr": "10.0.131.2"
+                    }
+                }
+            ],
+            "opts": {
+            }
+        }
+    ]
+}
+

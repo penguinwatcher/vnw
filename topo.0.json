@@ -1,0 +1,27 @@
+{
+    "channels":[
+        {
+            "name": "vbr-pext",
+            "opts": {
+            }
+        }
+    ],
+    
+    "nodes":[
+        {
+            "name": "qgw", 
+            "net_devices":[
+                {
+                    "name": "veth0",
+                    "channel": "vbr-pext",
+                    "opts": {
+                        "ip_addr": "10.0.131.254"
+                    }
+                }
+            ],
+            "opts": {
+            }
+        }
+    ]
+}
+
